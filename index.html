@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Suma y Multiplicación de Matrices - TensorFlow.js</title>
+    <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+    }
+    h2 {
+      color: #333;
+    }
+    .matriz {
+      background-color: #fff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Generador de Matrices Aleatorias con TensorFlow.js</h2>
+
+  <!-- Formulario para ingresar dimensiones -->
+  <label for="filas">Filas:</label>
+  <input type="number" id="filas" min="1" value="3">
+  <label for="columnas">Columnas:</label>
+  <input type="number" id="columnas" min="1" value="3">
+  <button onclick="generarMatrices()">Generar Matrices</button>
+
+  <!-- Contenedores para mostrar los resultados -->
+  <div class="matriz" id="matriz1"></div>
+  <div class="matriz" id="matriz2"></div>
+  <div class="matriz" id="suma"></div>
+  <div class="matriz" id="multiplicacion"></div>
+
+  <script>
+    // Función para convertir el tensor en string para mostrar en HTML
+    async function mostrarTensor(id, titulo, tensor) {
+      const data = await tensor.array();
+      let contenido = `${titulo}\n`;
+        contenido += '---------------------\n';
+      data.forEach(fila => {
+        contenido += fila.join('\t') + '\n';
+      });
+      document.getElementById(id).textContent = contenido;
+    }
+
+    // Función para generar y mostrar las matrices
+    function generarMatrices() {
+      // Obtener dimensiones ingresadas por el usuario
+      const filas = parseInt(document.getElementById("filas").value);
+      const columnas = parseInt(document.getElementById("columnas").value);
+
+      // Generar matrices aleatorias
+      const matriz1 = tf.randomUniform([filas, columnas], 1, 21, 'int32');
+      const matriz2 = tf.randomUniform([filas, columnas], 1, 21, 'int32');
+
+      // Operaciones
+      const suma = tf.add(matriz1, matriz2);
+      const multiplicacion = tf.mul(matriz1, matriz2);
+
+      // Mostrar en HTML
+      mostrarTensor("matriz1", "Matriz 1", matriz1);
+      mostrarTensor("matriz2", "Matriz 2", matriz2);
+      mostrarTensor("suma", "Suma de Matrices", suma);
+      mostrarTensor("multiplicacion", "Multiplicación elemento a elemento", multiplicacion);
+    }
+  </script>
+</body>
+</html>
