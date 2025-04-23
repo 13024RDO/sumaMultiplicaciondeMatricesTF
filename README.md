@@ -21,14 +21,6 @@ Este proyecto permite al usuario generar matrices aleatorias utilizando la libre
 
 ---
 
-## 📷 Captura
-
-![Captura del proyecto](screenshot.png)
-
-> Si querés que se vea bien en GitHub, guardá una captura de pantalla como `screenshot.png` en la raíz del proyecto.
-
----
-
 ## ▶️ Cómo usar
 
 1. Cloná o descargá el repositorio.
